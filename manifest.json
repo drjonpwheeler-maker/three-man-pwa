@@ -2,7 +2,7 @@
   "name": "Three-Man Points",
   "short_name": "3-Man Pts",
   "description": "9-point golf game scorer for 3 players",
-  "start_url": "/three-man-points/",
+  "drjonpwheeler-maker": "/three-man-points/",
   "display": "standalone",
   "background_color": "#0f1e0f",
   "theme_color": "#0f1e0f",
