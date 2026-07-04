@@ -1,4 +1,4 @@
-const CACHE = 'three-man-v2';
+const CACHE = 'three-man-v3';
 const ASSETS = ['./', './index.html', './styles.css', './app.js', './manifest.json'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));

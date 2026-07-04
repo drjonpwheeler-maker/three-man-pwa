@@ -14,7 +14,7 @@
 <body>
 
 <!-- ══════════════════════════════════════════════════════
-     SCREEN 1 · SETUP — player names + holes
+     SCREEN 1 · SETUP — player names + handicaps
 ══════════════════════════════════════════════════════ -->
 <div class="screen active" id="screen-setup">
   <div class="setup-header">
@@ -30,7 +30,7 @@
         <input class="name-input" id="p1-name" type="text" placeholder="Player 1" maxlength="16" autocomplete="off" />
         <div class="hcp-wrap">
           <span class="hcp-label">HCP</span>
-          <input class="hcp-input" id="p1-hcp" type="number" min="0" max="54" placeholder="0" />
+          <input class="hcp-input" id="p1-hcp" type="number" min="0" max="54" placeholder="0" inputmode="numeric" />
         </div>
       </div>
       <div class="player-row">
@@ -38,7 +38,7 @@
         <input class="name-input" id="p2-name" type="text" placeholder="Player 2" maxlength="16" autocomplete="off" />
         <div class="hcp-wrap">
           <span class="hcp-label">HCP</span>
-          <input class="hcp-input" id="p2-hcp" type="number" min="0" max="54" placeholder="0" />
+          <input class="hcp-input" id="p2-hcp" type="number" min="0" max="54" placeholder="0" inputmode="numeric" />
         </div>
       </div>
       <div class="player-row">
@@ -46,7 +46,7 @@
         <input class="name-input" id="p3-name" type="text" placeholder="Player 3" maxlength="16" autocomplete="off" />
         <div class="hcp-wrap">
           <span class="hcp-label">HCP</span>
-          <input class="hcp-input" id="p3-hcp" type="number" min="0" max="54" placeholder="0" />
+          <input class="hcp-input" id="p3-hcp" type="number" min="0" max="54" placeholder="0" inputmode="numeric" />
         </div>
       </div>
     </div>
@@ -59,29 +59,76 @@
     </div>
   </div>
   <div class="setup-footer">
-    <button class="btn-primary" id="btn-to-hcp">Set Hole Ratings →</button>
+    <button class="btn-primary" id="btn-to-hcp">Set Hole Info →</button>
     <button class="btn-ghost" id="btn-resume" style="display:none">Resume Last Round</button>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════════════════
-     SCREEN 2 · HOLE HCP RATINGS
+     SCREEN 2 · HOLE INFO — par + HCP ratings + course save/load
 ══════════════════════════════════════════════════════ -->
 <div class="screen" id="screen-hcp">
   <div class="card-header">
     <button class="icon-btn" id="btn-hcp-back">←</button>
     <div class="card-title-block">
-      <div class="card-title">Hole Ratings</div>
-      <div class="card-sub">HCP 1 = hardest · HCP 18 = easiest</div>
+      <div class="card-title">Course Setup</div>
+      <div class="card-sub" id="hcp-screen-sub">Par &amp; HCP ratings per hole</div>
     </div>
-    <button class="icon-btn" id="btn-hcp-clear">↺</button>
+    <button class="icon-btn" id="btn-hcp-courses">🏌</button>
   </div>
+
+  <!-- Saved course banner (shown when a course is loaded) -->
+  <div class="loaded-course-bar" id="loaded-course-bar" style="display:none">
+    <span class="loaded-course-icon">📍</span>
+    <span class="loaded-course-name" id="loaded-course-name"></span>
+    <button class="loaded-course-clear" id="btn-clear-course">✕</button>
+  </div>
+
   <div class="scroll-content">
-    <div class="hcp-note">Enter each hole's handicap rating from your course scorecard. These determine which holes each player receives a stroke on.</div>
+    <div class="hcp-note">
+      Enter par and handicap rating for each hole. HCP 1 = hardest, HCP 18 = easiest.
+      Load a saved course or enter manually and save for next time.
+    </div>
+
+    <!-- Column headers -->
+    <div class="hole-grid-header">
+      <div class="hgh-hole">Hole</div>
+      <div class="hgh-par">Par</div>
+      <div class="hgh-hcp">HCP Rating</div>
+    </div>
+
     <div id="hcp-grid" class="hcp-grid"></div>
+
+    <!-- Save course row -->
+    <div class="save-course-row">
+      <input class="save-course-input" id="course-name-input" type="text"
+             placeholder="Course name to save…" maxlength="40" autocomplete="off" />
+      <button class="save-course-btn" id="btn-save-course">Save</button>
+    </div>
   </div>
   <div class="screen-footer">
     <button class="btn-primary" id="btn-start">Start Round →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SCREEN 2b · SAVED COURSES LIST
+══════════════════════════════════════════════════════ -->
+<div class="screen" id="screen-courses">
+  <div class="card-header">
+    <button class="icon-btn" id="btn-courses-back">←</button>
+    <div class="card-title-block">
+      <div class="card-title">Saved Courses</div>
+      <div class="card-sub" id="courses-count-sub">0 courses saved</div>
+    </div>
+    <div style="width:40px"></div>
+  </div>
+  <div class="scroll-content">
+    <div id="courses-list"></div>
+    <div class="no-courses-msg" id="no-courses-msg" style="display:none">
+      <div class="no-courses-icon">🏌️</div>
+      <div class="no-courses-text">No courses saved yet.<br>Enter hole info and tap Save.</div>
+    </div>
   </div>
 </div>
 
