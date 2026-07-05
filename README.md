@@ -57,3 +57,4 @@ Gold dots (●) on the scorecard indicate which holes a player receives a stroke
 ├── manifest.json       — PWA manifest
 └── .github/workflows/deploy.yml
 ```
+
